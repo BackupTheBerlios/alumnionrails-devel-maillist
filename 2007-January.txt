@@ -1,0 +1,572 @@
+From ph.wolfer at web.de  Fri Jan 19 17:57:14 2007
+From: ph.wolfer at web.de (Philipp Wolfer)
+Date: Fri, 19 Jan 2007 17:57:14 +0100
+Subject: [Alumnionrails-devel] Mikroformate und SVN-Checkin-Liste
+Message-ID: <132404765@web.de>
+
+Hi Leute,
+
+so, jetzt sollten auch die Log-Meldungen aus dem SVN auch auf alumnionrails-svncheckins at lists.berlios.de landen.
+
+Andere Frage: Was haltet ihr von der Unterst?tzung von Mikroformaten f?r die Kontakte und Events?
+
+Siehe auch:
+http://microformats.org
+http://microformats.org/wiki/hcard
+http://microformats.org/wiki/hcalendar
+
+Das sch?ne daran ist, dass die Information in das normale HTML eingebettet werden kann und somit sowohl f?r den User als auch f?r den Browser auswertbar ist. Erste Browser-Plugins zum extrahieren von Mikroformaten gibt es auch schon, z.B. http://www.kaply.com/weblog/
+
+Gru?
+Phil
+
+-- 
+Philipp Wolfer 
+_____________________________________________________________________
+Der WEB.DE SmartSurfer hilft bis zu 70% Ihrer Onlinekosten zu sparen!
+http://smartsurfer.web.de/?mc=100071&distributionid=000000000066
+
+
+
+From m at rceldevantier.de  Fri Jan 19 20:24:30 2007
+From: m at rceldevantier.de (Marcel Devantier)
+Date: Fri, 19 Jan 2007 20:24:30 +0100
+Subject: [Alumnionrails-devel] Mikroformate und SVN-Checkin-Liste
+In-Reply-To: <132404765@web.de>
+References: <132404765@web.de>
+Message-ID: <45B11AEE.4070307@rceldevantier.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+> so, jetzt sollten auch die Log-Meldungen aus dem SVN auch auf alumnionrails-svncheckins at lists.berlios.de landen.
+
+haha, auch die fehlerhaften logins?
+
+> Andere Frage: Was haltet ihr von der Unterst?tzung von Mikroformaten f?r die Kontakte und Events?
+
+Finde ich eine gute Idee, hatte auch schon an den Download von *.vcf
+Formaten gedacht ...
+
+> Siehe auch:
+> http://microformats.org
+> http://microformats.org/wiki/hcard
+> http://microformats.org/wiki/hcalendar
+> 
+> Das sch?ne daran ist, dass die Information in das normale HTML eingebettet werden kann und 
+> somit sowohl f?r den User als auch f?r den Browser auswertbar ist.
+
+d.h. die Darstellung machen wir dann gleich so im Browser?
+
+Marcel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.2 (MingW32)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFsRrufO41xH7COYIRAuxhAJ9uT4f0DECZWpvlrxiLEphHoFEmkwCdEbMl
+Sq1bwS2QGH+e1kVKTFknazg=
+=xC3z
+-----END PGP SIGNATURE-----
+
+
+From ph.wolfer at web.de  Fri Jan 19 20:43:55 2007
+From: ph.wolfer at web.de (Philipp Wolfer)
+Date: Fri, 19 Jan 2007 20:43:55 +0100
+Subject: [Alumnionrails-devel] Mikroformate und SVN-Checkin-Liste
+In-Reply-To: <45B11AEE.4070307@rceldevantier.de>
+References: <132404765@web.de>  <45B11AEE.4070307@rceldevantier.de>
+Message-ID: <1169235835.5101.11.camel@bullgod>
+
+Am Freitag, den 19.01.2007, 20:24 +0100 schrieb Marcel Devantier:
+> > Das sch?ne daran ist, dass die Information in das normale HTML eingebettet werden kann und 
+> > somit sowohl f?r den User als auch f?r den Browser auswertbar ist.
+> 
+> d.h. die Darstellung machen wir dann gleich so im Browser?
+
+Ja, genau. Ein Beispiel w?re folgendes:
+
+<div class="vcard">
+ <span class="fn">Philipp Wolfer</span>
+ <a class="email" href="mailto:ph.wolfer at web.de">ph.wolfer at web.de</a>
+ <div class="adr">
+  <div class="street-address">Birkenweg 4</div>
+  <span class="postal-code">78464</span> <span
+class="locality">Konstanz</span>
+ </div>
+</div>
+
+Das ist ein g?ltiger hCard-Eintrag, der durch den Browser als Adresse
+erkannt werden kann. Wichtig sind die CSS-Klassennamen, die dienen der
+Struktur. Welchen HTML-Tags die Klassen zugeordnet oder die Reihenfolge
+der Tags sind egal. Ich kann auch zus?tzliches HTML unterbringen.
+Folgender hCard-Eintrag ist von der Information her identisch zum
+obigen, aber sieht f?r den User anders aus:
+
+<div class="vcard">
+ <a class="email"
+href="mailto:ph.wolfer at web.de">ph.wolfer at web.de</a><br />
+ <span class="fn">Philipp Wolfer</span>
+ <div class="adr">
+ Adresse:
+  <div class="street-address">Birkenweg 4</div>
+  <span class="postal-code">78464</span> <span
+class="locality">Konstanz</span>
+ </div>
+</div>
+
+Formatierung macht man am einfachsten ?ber CSS-Klassen-Hierarchien, wie
+z.B. ".vcard .adr .street-address { color: red; }"
+
+Das ganze l?sst sich also prima in den Views hinterlegen.
+
+Gru?
+Phil
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/alumnionrails-devel/attachments/20070119/2dacc909/attachment.pgp>
+
+From m at rceldevantier.de  Fri Jan 19 20:57:49 2007
+From: m at rceldevantier.de (Marcel Devantier)
+Date: Fri, 19 Jan 2007 20:57:49 +0100
+Subject: [Alumnionrails-devel] Status Server
+In-Reply-To: <1169235835.5101.11.camel@bullgod>
+References: <132404765@web.de> <45B11AEE.4070307@rceldevantier.de>
+	<1169235835.5101.11.camel@bullgod>
+Message-ID: <45B122BD.8090502@rceldevantier.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+Hallo zusammen,
+
+wenn wir einmal dabei sind, gleich mal eine Statusbericht von mir.
+
+Seit heute funktioniert das Rails sowie das Deployment mit Capistrano
+auf dem Development-Server und Production-Server.
+
+Hier mal 2 Beispiel-URL.
+
+http://www.devantier.cc/alumnionrails/user/list
+
+http://ali.ba-ravensburg.de/alumnionrails/user/list
+
+Marcel
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.2 (MingW32)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFsSK9fO41xH7COYIRAi9JAJ9UH6wi5J49H3DQ5tVuWeOdFf5ttwCbBGlB
+OJe5hRU0HdmTufRQPteJTfU=
+=UirU
+-----END PGP SIGNATURE-----
+
+
+From jochenbb at aol.com  Sat Jan 20 13:30:25 2007
+From: jochenbb at aol.com (Jochen Ritscher)
+Date: Sat, 20 Jan 2007 13:30:25 +0100
+Subject: [Alumnionrails-devel] Mikroformate und SVN-Checkin-Liste
+In-Reply-To: <45B11AEE.4070307@rceldevantier.de>
+References: <132404765@web.de> <45B11AEE.4070307@rceldevantier.de>
+Message-ID: <45B20B61.8040801@aol.com>
+
+
+
+    *Andere Frage: Was haltet ihr von der Unterst?tzung von Mikroformaten f?r die Kontakte und Events?*
+
+      
+
+Standardisierte Adressdaten sind f?r uns interessant (und ein _USP..). Wichtig w?re auch der Import in Outlook/Thunderbird.
+
+hcard l?sst sich mit Rails sehr einfach realisieren:
+
+- Microformat Helper: http://blog.labnotes.org/2006/08/25/microformats-helper-for-ruby-on-rails/
+
+- Microformat Cheatsheet: http://blog.labnotes.org/2006/09/06/microformats-helper-cheat-sheet/
+
+=> hCard ist f?r uns wie es aussieht sehr einfach zu implementieren, vor allem mit Rails-Helper. Also - gute Idee! Machen wir.
+
+
+btw: http://cheat.errtheblog.com/
+
+
+
+From ph.wolfer at web.de  Sat Jan 20 14:16:40 2007
+From: ph.wolfer at web.de (Philipp Wolfer)
+Date: Sat, 20 Jan 2007 14:16:40 +0100
+Subject: [Alumnionrails-devel] Mikroformate und SVN-Checkin-Liste
+In-Reply-To: <45B20B61.8040801@aol.com>
+References: <132404765@web.de> <45B11AEE.4070307@rceldevantier.de>
+	<45B20B61.8040801@aol.com>
+Message-ID: <1169299000.5103.1.camel@bullgod>
+
+Am Samstag, den 20.01.2007, 13:30 +0100 schrieb Jochen Ritscher:
+> => hCard ist f?r uns wie es aussieht sehr einfach zu implementieren, vor allem mit Rails-Helper. Also - gute Idee! Machen wir.
+
+ok, meine meinung. der helper scheint nur hEvent nicht zu unterst?tzen,
+aber das w?re ja auch kein problem. selbst ohne helper ist das sehr
+einfach zu implementieren.
+
+gru?
+phil
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/alumnionrails-devel/attachments/20070120/9c228419/attachment.pgp>
+
+From ph.wolfer at web.de  Sat Jan 20 19:22:21 2007
+From: ph.wolfer at web.de (Philipp Wolfer)
+Date: Sat, 20 Jan 2007 19:22:21 +0100
+Subject: [Alumnionrails-devel] Mehrsprachigkeit
+Message-ID: <1169317341.5103.19.camel@bullgod>
+
+Hi,
+
+ich habe Neuigkeiten zur Mehrsprachigkeit. Ich habe mir die beiden
+Alternativen GLoc und Ruby GetText mal genauer angeschaut und beides
+getestet. GetText scheint mir das akzeptablere zu sein.
+
+Beide Systeme sind grunds?tzlich vergleichbar, sie speichern die zu
+?bersetzenden Texte in sprachabh?ngigen Dateien und erlauben das
+Einbinden von Texten in den Rails-Klassen und -Views ?ber spezielle
+Methoden. Gettext hat aber den sehr gro?en Vorteil, dass man die Texte
+aus dem Programm automatisch extrahieren kann. Dabei werden ?nderungen
+(z.B. neue mehrsprachige Texte) in die bereits vorhandenen Sprachdateien
+aufgenommen. Bei GLoc muss man alles von Hand pflegen. GetText ist
+au?erdem weit verbreitet und es gibt komfortable Editoren zum Bearbeiten
+der Textdateien (z.B. PoEdit http://www.poedit.org)
+
+Ich habe deswegen gettext in den Trunk eingecheckt. Folgendes m?sst ihr
+zum arbeiten mit gettext beachten:
+
+1. gettext f?r Ruby installieren mit "gem install gettext"
+2. RadRails auf UTF-8 umstellen
+3. Oberfl?chen-Strings in Klassen und Views immer mit der speziellen
+Methode "_" ausgeben. Also anstatt "Text" immer _("Text") schreiben
+4. Sind neue Strings hinzugekommen muss "rake updatepo" ausgef?hrt
+werden. Das aktualisiert die Sprachdateien im Verzeichnis "po", die dann
+?bersetzt werden k?nnen.
+5. Mit "rake makemo" werden die Sprachdateien f?r die Anwendung
+umgewandelt
+
+Marcel, kannst Du das ruby-gettext auch noch auf den Servern
+installieren?
+
+Gru?
+Phil
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/alumnionrails-devel/attachments/20070120/20786c29/attachment.pgp>
+
+From jochenbb at aol.com  Sun Jan 21 19:32:03 2007
+From: jochenbb at aol.com (Jochen Ritscher)
+Date: Sun, 21 Jan 2007 19:32:03 +0100
+Subject: [Alumnionrails-devel] Rails 1.2.1 Update
+Message-ID: <45B3B1A3.1040805@aol.com>
+
+Seit diesem Wochenende gibt es die neue Rails-Version 1.2.1
+
+http://weblog.rubyonrails.org/2007/1/19/rails-1-2-rest-admiration-http-lovefest-and-utf-8-celebrations
+
+Update funktioniert problemlos, gerade getestet. Ich denke wir sollten 
+in der Entwicklung mit der Rails-Entwicklung so weit wie m?glich 
+mitgehen. Deswegen bitte alle Clients und die 2 Server updaten:
+
+gem install rails
+
++ danach in der config/environment.rb der applikation die versionsnummer 
+1.6.1 auf 1.2.1 ?ndern.
+("If you go with the gems, remember to change your version binding in 
+config/environment.rb. Otherwise, you?ll still be tied to whatever old 
+version you were using before.")
+
+Danach ist ein gettext-update n?tig:
+
+gem install gettext
+
+und hier version 1.9 ausw?hlen
+
+fertig.
+
+werde die gesamte applikation bis mittwochabend mit 1.2.1 neu aufsetzen 
+und ins svn einchecken, damit wir komplett auf dem aktuellen stand sind.
+
+gru?,
+
+jr
+
+
+
+
+From m at rceldevantier.de  Sun Jan 21 20:35:12 2007
+From: m at rceldevantier.de (Marcel Devantier)
+Date: Sun, 21 Jan 2007 20:35:12 +0100
+Subject: [Alumnionrails-devel] Rails 1.2.1 Update
+In-Reply-To: <45B3B1A3.1040805@aol.com>
+References: <45B3B1A3.1040805@aol.com>
+Message-ID: <45B3C070.9060709@rceldevantier.de>
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+> werde die gesamte applikation bis mittwochabend mit 1.2.1 neu aufsetzen 
+> und ins svn einchecken, damit wir komplett auf dem aktuellen stand sind.
+
+gib mir bescheid ... dann mach ich das Update von Rails vor dem
+Deplyoment ...
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.2.2 (MingW32)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org
+
+iD8DBQFFs8BwfO41xH7COYIRAjHNAJ9UgRa5lO+Qmf95k5W1hY1u+Yns+wCfYpy6
+9UuA/tCd8zdccV/rr4vwo8w=
+=Dll7
+-----END PGP SIGNATURE-----
+
+
+From mail at jochenritscher.de  Fri Jan 26 16:27:41 2007
+From: mail at jochenritscher.de (mail at jochenritscher.de)
+Date: Fri, 26 Jan 2007 16:27:41 +0100
+Subject: [Alumnionrails-devel] Fwd: RubyForge Projekt genehmigt
+Message-ID: <20070126162741.40jsutjvr4s00kc0@ps-ssl.de>
+
+Aufgrund der Instabilit?t von Berlios..:
+
+----- Forwarded message from noreply at rubyforge.org -----
+     Date: Fri, 26 Jan 2007 06:21:05 -0500 (EST)
+     From: noreply at rubyforge.org
+Reply-To: noreply at rubyforge.org
+  Subject: RubyForge Projekt genehmigt
+       To: mail at jochenritscher.de
+
+Ihre Projekt-Registrierung f??r RubyForge wurde genehmigt.
+
+Vollst??ndiger Name des Projektes:  Alumni on Rails
+Unix-Name des Projektes:  alumnionrails
+CVS-Server:         cvs.alumnionrails.rubyforge.org
+Shell/Web-Server:   alumnionrails.rubyforge.org
+
+Ihr DNS wird bis zu einem Tag ben??tigen, bis es f??r Ihre Site funktioniert.
+W??hrend Sie auf Ihre DNS-Aufl??sung warten, m??chten Sie sich  
+vielleicht an Ihrer Shell
+rubyforge.org anmelden und Ihr CVS auf rubyforge.org umstellen.
+
+Falls nach 6 Stunden Ihre Shell-/CVS-Accounts immer noch nicht  
+funktionieren, ??ffnen Sie bitten ein Support-Ticket damit wir einen  
+Blick auf das Problem werfen k??nnen.
+Bitte beachten Sie, dass alle Shell-/CVS-Accounts f??r Telnet  
+geschlossen sind und nur mit SSH1 funktionieren.
+
+Ihre Website ist ??ber Ihren Shell-Account zug??nglich. Bitte lesen Sie
+die Site-Dokumentation (siehe Link unten) ??ber korrekte Verwendung,  
+verf??gbare
+Services und die Verzeichnisstruktur des Accounts.
+
+Wenn Sie Ihre eigenei
+Projekt-Seite auf RubyForge besuchen, w??hrend Sie angemeldet sind,  
+finden Sie eine
+
+zus??tzlichen Men??punkt auf der linken Seite mit der Bezeichnung  
+'Projekt-Admin'.
+
+Wir empfehlen Ihnen dringend , dass Sie jetzt RubyForge besuchen und  
+eine ??ffentlichei
+Beschreibung f??r Ihr Projekt erstellen. Das k??nnen Sie tun, wenn Sie  
+Ihre Projektseite besuchen, w??hrend Sie angemeldet/eingeloggt sind,  
+und Sie 'Projekt-Admin' von den Men??si
+auf der linken Seite ausw??hlen (oder durch besuchen von  
+http://rubyforge.org/project/admin/?group_id=2959
+nach dem Anmelden).
+
+Ihr Projekt wird auch nicht in unserem Software Katalog (Liste der  
+gehosteten Projekte auf RubyForge) aufgef??hrt, bis Sie Ihr Projekt  
+daf??r kategorisieren. Damit Leute Ihr Projekt finden k??nnen, sollten  
+Sie das jetzt tun.i
+Besuchen Sie Ihr Projekt w??hrend Sie angemeldet sind und w??hlen Sie  
+'Project Admin' von den
+Men??s auf der linken Seite.
+
+Genie??en Sie das System und erz??hlen Sie anderen ??ber RubyForge.  
+Lassen Sie es uns wissen,
+wenn dort irgend etwas ist, wobei wir Ihnen helfen k??nnen.
+
+-- Die RubyForge Mannschaft
+
+
+----- End forwarded message -----
+
+
+
+
+From ph.wolfer at web.de  Fri Jan 26 18:10:07 2007
+From: ph.wolfer at web.de (Philipp Wolfer)
+Date: Fri, 26 Jan 2007 18:10:07 +0100
+Subject: [Alumnionrails-devel] Fwd: RubyForge Projekt genehmigt
+Message-ID: <147863745@web.de>
+
+und welche dienste dort sollen wir nutzen? wir verteilen so langsam unsere infrastruktur auf tausend server und verbringen unsere zeit damit das alles zu verwalten. ich finde das nicht gut.
+
+just my 2 cents,
+phil
+
+> -----Urspr?ngliche Nachricht-----
+> Von: mail at jochenritscher.de
+> Gesendet: 26.01.07 16:35:17
+> An: alumnionrails-devel at berlios.de
+> Betreff: [Alumnionrails-devel] Fwd: RubyForge Projekt genehmigt
+
+
+> Aufgrund der Instabilit?t von Berlios..:
+> 
+> ----- Forwarded message from noreply at rubyforge.org -----
+>      Date: Fri, 26 Jan 2007 06:21:05 -0500 (EST)
+>      From: noreply at rubyforge.org
+> Reply-To: noreply at rubyforge.org
+>   Subject: RubyForge Projekt genehmigt
+>        To: mail at jochenritscher.de
+> 
+> Ihre Projekt-Registrierung f??r RubyForge wurde genehmigt.
+> 
+> Vollst??ndiger Name des Projektes:  Alumni on Rails
+> Unix-Name des Projektes:  alumnionrails
+> CVS-Server:         cvs.alumnionrails.rubyforge.org
+> Shell/Web-Server:   alumnionrails.rubyforge.org
+> 
+> Ihr DNS wird bis zu einem Tag ben??tigen, bis es f??r Ihre Site funktioniert.
+> W??hrend Sie auf Ihre DNS-Aufl??sung warten, m??chten Sie sich  
+> vielleicht an Ihrer Shell
+> rubyforge.org anmelden und Ihr CVS auf rubyforge.org umstellen.
+> 
+> Falls nach 6 Stunden Ihre Shell-/CVS-Accounts immer noch nicht  
+> funktionieren, ??ffnen Sie bitten ein Support-Ticket damit wir einen  
+> Blick auf das Problem werfen k??nnen.
+> Bitte beachten Sie, dass alle Shell-/CVS-Accounts f??r Telnet  
+> geschlossen sind und nur mit SSH1 funktionieren.
+> 
+> Ihre Website ist ??ber Ihren Shell-Account zug??nglich. Bitte lesen Sie
+> die Site-Dokumentation (siehe Link unten) ??ber korrekte Verwendung,  
+> verf??gbare
+> Services und die Verzeichnisstruktur des Accounts.
+> 
+> Wenn Sie Ihre eigenei
+> Projekt-Seite auf RubyForge besuchen, w??hrend Sie angemeldet sind,  
+> finden Sie eine
+> 
+> zus??tzlichen Men??punkt auf der linken Seite mit der Bezeichnung  
+> 'Projekt-Admin'.
+> 
+> Wir empfehlen Ihnen dringend , dass Sie jetzt RubyForge besuchen und  
+> eine ??ffentlichei
+> Beschreibung f??r Ihr Projekt erstellen. Das k??nnen Sie tun, wenn Sie  
+> Ihre Projektseite besuchen, w??hrend Sie angemeldet/eingeloggt sind,  
+> und Sie 'Projekt-Admin' von den Men??si
+> auf der linken Seite ausw??hlen (oder durch besuchen von  
+> http://rubyforge.org/project/admin/?group_id=2959
+> nach dem Anmelden).
+> 
+> Ihr Projekt wird auch nicht in unserem Software Katalog (Liste der  
+> gehosteten Projekte auf RubyForge) aufgef??hrt, bis Sie Ihr Projekt  
+> daf??r kategorisieren. Damit Leute Ihr Projekt finden k??nnen, sollten  
+> Sie das jetzt tun.i
+> Besuchen Sie Ihr Projekt w??hrend Sie angemeldet sind und w??hlen Sie  
+> 'Project Admin' von den
+> Men??s auf der linken Seite.
+> 
+> Genie?&#65533;en Sie das System und erz??hlen Sie anderen ??ber RubyForge.  
+> Lassen Sie es uns wissen,
+> wenn dort irgend etwas ist, wobei wir Ihnen helfen k??nnen.
+> 
+> -- Die RubyForge Mannschaft
+> 
+> 
+> ----- End forwarded message -----
+> 
+> 
+> _______________________________________________
+> Alumnionrails-devel mailing list
+> Alumnionrails-devel at lists.berlios.de
+> https://lists.berlios.de/mailman/listinfo/alumnionrails-devel
+> 
+
+-- 
+Philipp Wolfer <ph.wolfer at web.de>
+_______________________________________________________________________
+Viren-Scan f?r Ihren PC! Jetzt f?r jeden. Sofort, online und kostenlos.
+Gleich testen! http://www.pc-sicherheit.web.de/freescan/?mc=022222
+
+
+
+From ph.wolfer at web.de  Fri Jan 26 23:33:48 2007
+From: ph.wolfer at web.de (Philipp Wolfer)
+Date: Fri, 26 Jan 2007 23:33:48 +0100
+Subject: [Alumnionrails-devel] Neues Repository
+Message-ID: <1169850828.4988.4.camel@bullgod>
+
+Habe das neue Repository bef?llt. Habe das ganze mit Rails 1.2.1 neu
+aufgesetzt und die config und migrations ?bernommen. 
+
+Neue URL:
+svn+ssh://developername at rubyforge.org/var/svn/alumnionrails/trunk
+
+gru?
+phil
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: Dies ist ein digital signierter Nachrichtenteil
+URL: <https://lists.berlios.de/pipermail/alumnionrails-devel/attachments/20070126/09088aec/attachment.pgp>
+
+From m at rceldevantier.de  Sat Jan 27 17:39:20 2007
+From: m at rceldevantier.de (Marcel Devantier)
+Date: Sat, 27 Jan 2007 17:39:20 +0100
+Subject: [Alumnionrails-devel] Deploy Production Server
+In-Reply-To: <1169850828.4988.4.camel@bullgod>
+References: <1169850828.4988.4.camel@bullgod>
+Message-ID: <45BB8038.5010506@rceldevantier.de>
+
+Hallo zusammen,
+
+das Deployment auf dem Production Server hast funktioniert.
+Der Server hat jetzt die aktuelle Version.
+
+http://ali.ba-ravensburg.de/alumnionrails/
+
+Marcel
+
+
+
+From phw at users.berlios.de  Sun Jan 28 19:29:24 2007
+From: phw at users.berlios.de (Philipp Wolfer)
+Date: Sun, 28 Jan 2007 19:29:24 +0100
+Subject: [Alumnionrails-devel] Rubyforge down, Login-Mechanismus
+Message-ID: <c45b7a6e0701281029r74250c4cscd631a81f675635d@mail.gmail.com>
+
+Hi Leute,
+
+?rgerlich, Rubyforge ist heute schon den ganzen Tag down.
+
+Ich habe aber den Login-Mechanismus eingebaut. Noch ohne Methoden-Stubs f?r
+die phpBB-Integration und auch ohne Registrierungsprozess. Aber man kann
+vorl?ufig ?ber die normalen "new" und "create" Aktionen User anlegen.
+
+Soweit zur Info. Sobald Rubyforge wieder tut checke ich das ein.
+
+Gru?
+Phil
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/alumnionrails-devel/attachments/20070128/4dc7b647/attachment.html>
+
